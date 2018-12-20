@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var api = require('./api/api');
+var error = require('./middleware/error');
 
 // setup the app middlware
 require('./middleware/appMiddlware')(app);
@@ -9,12 +10,7 @@ require('./middleware/appMiddlware')(app);
 app.use('/api', api);
 
 // set up global error handling
-app.use((err, req, res, next) => {
-    if(err) {
-        console.log(err.message);
-        res.status(500).send(err);
-    }
-});
+app.use(error);
 
 // export the app for testing
 module.exports = app;
