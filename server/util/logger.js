@@ -7,7 +7,6 @@ var config = require('../config/config');
 
 // create a noop (no operation) function for when loggin is disabled
 var noop = function(){};
-
 // check if loggin is enabled in the config
 // if it is, then use console.log
 // if not then noop
@@ -35,6 +34,10 @@ var logger = {
     // with the console object as the context
     // and the new colored args :)
     consoleLog.apply(console, args);
+  },
+
+  error: function() {
+    consoleLog.apply(console, _.toArray(arguments));
   }
 };
 
